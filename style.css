@@ -1,0 +1,86 @@
+
+/* Centrar toda la página */
+html, body {
+    background: linear-gradient(to left, #040607 , #023085);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: 'Oswald', sans-serif;
+    margin: 0; /* Eliminar márgenes por defecto */
+  }
+  
+  /* Centrar la cuadrícula */
+  .pad {
+    width: 450px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columnas iguales */
+    grid-template-rows: repeat(3, 1fr);   /* 3 filas iguales */
+    gap: 15px; /* Espaciado entre los elementos */
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Ajuste de los botones */
+  .box {
+    width: 100px;
+    height: 100px;
+    box-shadow: 0 8px 6px -6px black;
+    background-color: #9b9b9b;
+    position: relative; /* Necesario para posicionar elementos internos */
+    display: flex;
+    justify-content: center; /* Centra la imagen */
+    align-items: center;
+    padding: 5px;
+    user-select: none;
+  }
+  
+  /* Posiciona la letra en la esquina superior izquierda */
+  .box span {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    font-size: 12px;
+    color: rgba(0, 0, 0, 1);
+  }
+  
+  /* Posiciona la imagen en el centro */
+  .box img {
+    width: 50px;  /* Tamaño de la imagen */
+    height: 50px;
+    object-fit: contain; /* Mantiene la proporción de la imagen */
+    pointer-events: none; /* Evita que interfiera con clics */
+  }
+  
+  
+  
+  /* Ajuste del título */
+  h1 {
+    color: #fff;
+    font-size: 5vw;
+    letter-spacing: 6px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+
+
+.box:hover {
+    background-color: #666;
+    cursor: pointer;
+}
+
+.box:active {
+    background-color: #222;
+    transform: scale(1.1);
+    transition: all 0.2s;
+}
+
+.active {
+    background-color: #222;
+    transform: scale(1.1);
+    transition: all 0.2s;
+}
