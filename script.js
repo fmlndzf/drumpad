@@ -14,7 +14,7 @@ $(document).ready(function() {
         "V": "./sounds/Side-Stick.wav",
         "B": "./sounds/Cross-Sticks.wav",
         "N": "./sounds/Cowbell.wav",
-        "M": "https://drive.google.com/uc?export=download&id=1jXKPVUU-yjgGbzLm7WHvJblHKFr9k_mg"
+        "M": "./sounds/Clap.wav"
     };
 
     // Asignar eventos de clic a los pads
