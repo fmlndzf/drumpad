@@ -3,21 +3,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Mapeo de teclas con sonidos
     const sounds = {
-        "R": new Audio("./sounds/Ride-Cymbal.wav"),
-        "T": new Audio("./sounds/Pedal-Hi-Hat.wav"),
-        "Y": new Audio("./sounds/Open-Hi-Hat.wav"),
-        "U": new Audio("./sounds/Crash-Cymbal.wav"),
-        "F": new Audio("./sounds/Dry-Tom-4.wav"),
-        "G": new Audio("./sounds/Snap-Snare.wav"),
-        "H": new Audio("./sounds/Power-Tom-2.wav"),
-        "J": new Audio("./sounds/Bass-Drum-3.wav"),
-        "V": new Audio("./sounds/Side-Stick.wav"),
-        "B": new Audio("./sounds/Cross-Sticks.wav"),
-        "N": new Audio("./sounds/Cowbell.wav"),
-        "M": new Audio("./sounds/Clap.wav")
+        "7": new Audio("./sounds/Ride-Cymbal.wav"),
+        "8": new Audio("./sounds/Pedal-Hi-Hat.wav"),
+        "9": new Audio("./sounds/Open-Hi-Hat.wav"),
+        "-": new Audio("./sounds/Crash-Cymbal.wav"),
+        "4": new Audio("./sounds/Dry-Tom-4.wav"),
+        "5": new Audio("./sounds/Snap-Snare.wav"),
+        "6": new Audio("./sounds/Power-Tom-2.wav"),
+        "+": new Audio("./sounds/Bass-Drum-3.wav"),
+        "1": new Audio("./sounds/Side-Stick.wav"),
+        "2": new Audio("./sounds/Cross-Sticks.wav"),
+        "3": new Audio("./sounds/Cowbell.wav"),
+        "0": new Audio("./sounds/Clap.wav")
     };
 
-    // Función para reproducir el sonido correspondiente
+    // Función para reproducir sonido
     function playSound(key) {
         if (sounds[key]) {
             sounds[key].currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Asignar eventos de clic/tap a los pads
     document.querySelectorAll(".box").forEach(box => {
         box.addEventListener("pointerdown", () => {
-            let key = box.textContent.trim().toUpperCase();
+            let key = box.querySelector("span").textContent.trim();
             playSound(key);
             box.classList.add("active");
         });
@@ -40,24 +40,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Evento para presionar teclas
     window.addEventListener("keydown", (e) => {
-        let key = e.key.toUpperCase();
-        let pad = document.querySelector(`div[data-code='${e.keyCode}']`);
-        
-        if (pad && !pad.classList.contains("active")) {
+        let key = e.key;
+
+        if (sounds[key]) {  
             playSound(key);
-            pad.classList.add("active");
+            
+            document.querySelectorAll(".box").forEach(box => {
+                let boxKey = box.querySelector("span").textContent.trim();
+                if (boxKey === key) {
+                    box.classList.add("active");
+                }
+            });
         }
     });
 
     // Evento para soltar teclas
     window.addEventListener("keyup", (e) => {
-        let pad = document.querySelector(`div[data-code='${e.keyCode}']`);
-        if (pad) pad.classList.remove("active");
+        let key = e.key;
+        document.querySelectorAll(".box").forEach(box => {
+            let boxKey = box.querySelector("span").textContent.trim();
+            if (boxKey === key) {
+                box.classList.remove("active");
+            }
+        });
     });
 
     function ajustarTamaño() {
         const cuadrado = document.getElementById("pad");
-        const tamaño = Math.min(window.innerWidth, window.innerHeight) * 0.9; // 80% del menor lado
+        const tamaño = Math.min(window.innerWidth, window.innerHeight) * 0.9;
         cuadrado.style.width = tamaño + "px";
         cuadrado.style.height = tamaño + "px";
     }
@@ -65,5 +75,4 @@ document.addEventListener("DOMContentLoaded", () => {
     // Ajustar al cargar y al cambiar tamaño de ventana
     window.addEventListener("load", ajustarTamaño);
     window.addEventListener("resize", ajustarTamaño);
-   
 });
